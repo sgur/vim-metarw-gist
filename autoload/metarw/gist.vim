@@ -59,7 +59,7 @@ function! metarw#gist#authorize()  "{{{2
   \   'Content-Type': 'application/json',
   \   'Authorization' : 'basic ' . webapi#base64#b64encode(user . ':' . password)
   \ })
-  if result.header[0] !=# 'HTTP/1.1 201 Created'
+  if result.status !=# '201'
     echoerr result.header[0] . ': ' . api
     return
   endif
@@ -212,7 +212,7 @@ function! s:gist_metadata(_)  "{{{2
   let result = webapi#http#get(api, {}, {
   \   'Authorization': 'token ' . g:metarw_gist_token,
   \ })
-  if result.header[0] !=# 'HTTP/1.1 200 OK'
+  if result.status !=# '200'
     throw result.header[0] . ': ' . api
   endif
 
@@ -227,7 +227,7 @@ function! s:gist_list(_)  "{{{2
   let result = webapi#http#get(api, {}, {
   \   'Authorization': 'token ' . g:metarw_gist_token,
   \ })
-  if result.header[0] !=# 'HTTP/1.1 200 OK'
+  if result.status !=# '200'
     throw result.header[0] . ': ' . api
   endif
 
@@ -242,7 +242,7 @@ function! s:read_content(_)  "{{{2
   \                a:_.gist_id,
   \                a:_.gist_filename)
   let result = webapi#http#get(api)
-  if result.header[0] !=# 'HTTP/1.1 200 OK'
+  if result.status !=# '200'
     return ['error', result.header[0] . ': ' . api]
   endif
   put =result.content
