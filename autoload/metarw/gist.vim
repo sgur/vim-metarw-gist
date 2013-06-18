@@ -292,7 +292,8 @@ function! s:read_list(_)  "{{{2
   for gist in gist_list
     for file in values(gist.files)
       call add(result, {
-      \    'label': gist.id . '/' . file.filename,
+      \    'label': gist.id . '/' . file.filename
+      \    . (!empty(gist.description) ? '  ' . gist.description : ''),
       \    'fakepath': printf('%s:%s/%s/%s',
       \                       a:_.scheme,
       \                       a:_.gist_user,
