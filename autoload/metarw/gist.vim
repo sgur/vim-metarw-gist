@@ -323,7 +323,7 @@ function! s:write_new(_, content)  "{{{2
   \   'Content-Type': 'application/json',
   \   'Expect': ''
   \ })
-  if result.header[0] !=# 'HTTP/1.1 201 Created'
+  if result.status !=# '201'
     return ['error', result.header[0] . ': ' . api]
   endif
 
@@ -352,7 +352,7 @@ function! s:write_update(_, content)  "{{{2
   \   'Content-Type': 'application/json',
   \   'Expect': ''
   \ })
-  if result.header[0] !=# 'HTTP/1.1 200 OK'
+  if result.status !=# '201'
     return ['error', result.header[0] . ': ' . api]
   endif
 
