@@ -353,7 +353,7 @@ function! s:write_update(_, content)  "{{{2
   \   'Content-Type': 'application/json',
   \   'Expect': ''
   \ })
-  if result.status !=# '201'
+  if result.status !=# '200'
     return ['error', result.header[0] . ': ' . api]
   endif
 
